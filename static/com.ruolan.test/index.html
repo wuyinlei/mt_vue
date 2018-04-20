@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>TO DO LIST</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+
+<!--V层-->
+<div id="app">
+  <input :type="text" v-model="inputValue">
+  <!--v-on  绑定一个事件-->
+  <button v-on:click="handlerAddClick">提交</button>
+  <button v-on:click="handlerLessClick">删减</button>
+  <ul>
+    <!--v-for  帮助我们去循环数据   list表示的是data里面的list  item表示每次循环的内容
+
+    我们用 v-for 指令根据一组数组的选项列表进行渲染。
+    v-for 指令需要使用 item in items 形式的特殊语法，
+    items 是源数据数组并且 item 是数组元素迭代的别名。
+    -->
+    <li v-for="item in list">{{item}}</li>
+  </ul>
+</div>
+
+<!--VM层-->
+<script>
+  var app = new Vue({
+    el: "#app",
+    //固定的写法  代表这个vue实例里面的数据
+    data: {
+      list: ["第一课的内容", "第二课的内容", "第三课的内容"],
+      inputValue: ''
+    },
+    methods: {
+      //用于增加一个todolist
+      handlerAddClick: function () {
+        this.list.push(this.inputValue)
+        this.inputValue = ''
+      },
+      //用于消除一个todolist
+      handlerLessClick:function () {
+        this.list.pop(this.list[1])
+      }
+    }
+  })
+</script>
+
+</body>
+</html>
