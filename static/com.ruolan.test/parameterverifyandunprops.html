@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件参数校验与非Props特性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <child content="hello world"></child>
+</div>
+
+<script>
+
+    Vue.component("child", {
+        props: {
+            //代表content接收的必须是String类型
+            // content:[Number,String]
+            //校验相关属性
+            content: {
+                type: String,   //String类型
+                required: true,  //代表这个content是必须传递的
+                default: "Default Value", //默认值
+                validator: function (value) {
+                    return value.length > 5   //子组件接收的属性   这个值的长度必须大于5
+                }
+            }
+        },
+        template: "<div>{{content}}</div>"
+    })
+
+    var vm = new Vue({
+        el: "#app",
+        data: {}
+    })
+</script>
+</body>
+</html>
