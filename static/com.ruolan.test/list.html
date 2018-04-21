@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的列表渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <!--
+        我们用 v-for 指令根据一组数组的选项列表进行渲染。
+        v-for 指令需要使用 item in items 形式的特殊语法
+        items 是源数据数组并且 item 是数组元素迭代的别名。
+        
+        push()   添加数据
+        pop()    出数据
+        shift()  删除第一项
+        unshift()  第一项里面添加内容
+        splice()   截取
+        sort()   排序
+        reverse()  取反
+    -->
+    <!--<li v-for="(item,index) in list" :key="item.id">-->
+        <!--{{item.text}} &#45;&#45;&#45;&#45; {{index}}-->
+    <!--</li>-->
+    <!---->
+    
+    <!--你也可以利用带有 v-for 的 <template> 渲染多个元素-->
+    <!--<template v-for="(item,index) in list" :key="item.id">-->
+        <!---->
+        <!--<div>{{item.text}}</div>-->
+        <!--<span>{{item.text}}</span>-->
+
+
+    <!--</template>-->
+    
+    <div v-for="(item,key,index) in UserInfo">
+        {{item}}---{{key}} -- {{index}}
+    </div>
+    
+    
+</div>
+
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            UserInfo:{
+              name:"ruolan",
+              age:29,
+              gender:"male",
+              salary:"0.1K"
+            },
+            list: [
+                {
+                    id: "010112",
+                    text: "hello"
+                },
+                {
+                    id: "0101322",
+                    text: "ruolan"
+                },
+                {
+                    id: "010142",
+                    text: "nice"
+                },
+                {
+                    id: "011112",
+                    text: "too"
+                },
+                {
+                    id: "010132",
+                    text: "meet"
+                },
+                {
+                    id: "01011432",
+                    text: "you"
+                },
+            ]
+        },
+
+    })
+
+</script>
+</body>
+</html>
