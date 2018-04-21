@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>非父子组件传值(Bus/总线/发布订阅模式/观察者模式)</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+<body>
+
+<!--父组件如何向子组件传递数据   -&ndash;&gt;   通过属性的方式传递数据-->
+<!--子组件-->
+<div id="app">
+    
+    <child content="Ruolan" ></child>
+    <child content="Mingyue"></child>
+
+</div>
+
+
+<script>
+
+    //在Vue的这个类上挂载了一个bus属性   所以每一个vue的实例对象上都会有bus的这个属性
+    Vue.prototype.bus = new Vue()
+
+    Vue.component('child', {
+        data:function(){
+            //单向绑定  需要定义一个数据来接收   然后改变selfContent就不会有警告了
+            return{
+                selfContent:this.content
+            }
+        },
+        props: {
+            content: String
+        },
+        template: "<div @click='handlerClick'>{{selfContent}}</div>",
+        methods:{
+            handlerClick:function () {
+                // alert(this.content)
+                //this.bus 就是实例上  然后就会有$emit这个方法  然后利用这个方法向外触发事件  同时携带我要传递的数据
+                this.bus.$emit('change',this.selfContent)
+            }
+        },
+        mounted:function () {
+            var this_=this
+            this.bus.$on('change',function (msg) {
+                // alert(msg)
+                this_.selfContent = msg
+            })
+        }
+    })
+
+    var vm = new Vue({
+        el: "#app",
+    })
+</script>
+
+</body>
+</html>

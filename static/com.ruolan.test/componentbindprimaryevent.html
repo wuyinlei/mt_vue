@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>给组件绑定原生事件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+    <!--<child @click="handlerClick"></child>-->
+    
+    //给组件绑定原生事件很简单  只需要在事件绑定的后面加上native的修饰符就可以了
+    <child @click.native="handlerClick"></child>
+
+</div>
+
+<script>
+
+    //1.传递
+    // Vue.component('child', {
+    //     template: "<div @click='handlerChildClick'>child</div>",
+    //     methods:{
+    //         handlerChildClick:function () {
+    //             // alert("Child Click")
+    //             this.$emit('click')  //子组件点击后  然后向外触发一个自定义的click事件
+    //         }
+    //     }
+    // })
+
+    Vue.component('child', {
+        template: "<div>child</div>",
+    })
+
+    var vm = new Vue({
+        el: "#app",
+        methods: {
+            handlerClick: function () {
+                alert("点击了")
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
