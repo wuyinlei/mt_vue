@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Examples</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+  <div id="app">
+     <!--在这里我们可以通过v-on来定义一个点击事件   事件的名字是handlerClick  缩写语法就是@click-->
+      <div v-on:click="handlerClick">  {{message}}</div>
+      <!--在这里试用差值表达式{{}}来-->
+    
+      <!--子组件-->
+      <item></item>
+      
+  </div>
+  
+<script>
+    
+    //定义的组件    编译的时候也会编译成vue的实例    一个vue的项目是由好多个vue的实例拼装组成的
+    Vue.component('item',{
+        template:'<div>Hello Item</div>'
+    })
+    
+    var app = new Vue({
+        //el用来定义Vue这个实例用来接管DOM的最外层标签  #app 则表示用来接管div中id为app的这个DOM的显示
+        el:'#app',
+        //data用来定义实例
+        data:{
+            message:"Vue.js的实例"
+        },
+        //方法
+        methods:{
+            //定义监听的时间
+            handlerClick:function () {
+                alert("Hello")
+            }
+        }
+    })
+</script>
+</body>
+</html>
