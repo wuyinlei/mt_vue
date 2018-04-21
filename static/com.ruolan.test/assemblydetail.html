@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件试用中的细节点</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+    <!--<table>-->
+    <!--<tbody>-->
+    <!--&lt;!&ndash;1.注意&ndash;&gt;-->
+    <!--&lt;!&ndash;is="row"  这个是在下面定义的自定义组件之后的row-->
+    <!--因为在tbody里面只能使用tr  而不能使用<row  这个时候就使用is="row" 类似于别名&ndash;&gt;-->
+    <!--<tr is="row"></tr>-->
+    <!--<tr is="row"></tr>-->
+    <!--<tr is="row"></tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
+    
+    <!--<div-->
+    <!--ref="hello"-->
+    <!--@click="handlerClick">-->
+    <!--Hello World-->
+    <!--</div>-->
+    
+    
+    <!--3.ref的使用-->
+    <counter ref="one" @change="handlerChange"></counter>
+    <counter ref="two" @change="handlerChange">></counter>
+    <counter ref="three" @change="handlerChange">></counter>
+    <div>
+        {{total}}
+    </div>
+
+</div>
+
+<script>
+
+    // 2.注意因为子组件不向根组件那样只会调用一次  他可能在不同的地方调用
+    //     每一个子组件的自己的数据不想被其他组件混用 也就是每一个子组件都应该有自己的数据-->
+    // Vue.component('row', {
+    //     //在非根组件中  定义data的时候 就需要要求后面的值是个function函数
+    //     // 然后这个函数要求返回一个对象，这个对象要返回需要的内容
+    //     data: function () {
+    //         return {
+    //             content: "this is content"
+    //         }
+    //     },
+    //     template: '<tr><td>{{content}}</td></tr>'
+    // })
+
+    Vue.component("counter", {
+        template: "<div @click='handlerClick'>{{number}}</div>",
+        data: function () {
+            return {
+                number: 0
+            }
+        },
+        methods: {
+            handlerClick: function () {
+                this.number++
+                //告知外面触发一个事件
+                this.$emit('change')
+            }
+        }
+    })
+
+    //在根组件中  也就是vm这个实例中  定义data 可以直接下面的方式
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            total: 0
+        },
+        methods: {
+            handlerChange: function () {
+                this.total = this.$refs.one.number + this.$refs.two.number
+                    + this.$refs.three.number
+            }
+        }
+        // methods: {
+        //     handlerClick: function () {
+        //         //this.$refs代表这个应用里面的所有引用
+        //         console.log(this.$refs.hello.innerHTML)
+        //     }
+        // }
+    })
+
+</script>
+</body>
+</html>

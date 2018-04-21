@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件传值</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+<body>
+
+<!--父组件如何向子组件传递数据   -&ndash;&gt;   通过属性的方式传递数据-->
+<!--子组件-->
+<div id="app">
+    
+    //监听子组件触发的事件inc   然后定义父组件中的方法  handlerIncrease
+    <counter :count="2" @inc="handlerIncrease"></counter>
+    <counter :count="3" @inc="handlerIncrease">></counter>
+    {{total}}
+</div>
+
+
+<script>
+
+    var counter = {
+        props: ['count'],
+        //如果想要改变父组件传递过来的数据  需要在我们自定义的子组件中创建data  然后定义一个变量来接收父组件传递过来的数据
+        //然后试用我们这个自定义的变量  然后修改他就可以了
+        data: function () {
+            return {
+                number: this.count
+            }
+        },
+        template: "<div @click='handlerClick'>{{number}}</div>",
+        methods: {
+            handlerClick: function () {
+                //这个地方不要用下面这一句话  子组件不要随意修改父组件传递过来的数据   单向数据流形式
+                this.number++
+
+                //子组件传递数据到父组件中  通过触发事件
+                this.$emit('inc', 1)
+            }
+        }
+    }
+
+    var vm = new Vue({
+        el: "#app",
+        components: {
+            counter: counter
+        },
+        data: {
+            total: 5
+        },
+        methods: {
+            handlerIncrease: function (step) {
+                // alert("保存")
+                this.total = this.total + step
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
