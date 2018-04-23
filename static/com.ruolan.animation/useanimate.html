@@ -7,43 +7,50 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
     <style>
-        @keyframes bounce-in {
-            0% {
-                transform: scale(0);
-            }
-            
-            50% {
-                transform: scale(1.5);
-            }
-            
-            100% {
-                transform: scale(1);
-            }
-            
-        }
+        /*@keyframes bounce-in {*/
+        /*0% {*/
+        /*transform: scale(0);*/
+        /*}*/
+        /**/
+        /*50% {*/
+        /*transform: scale(1.5);*/
+        /*}*/
+        /**/
+        /*100% {*/
+        /*transform: scale(1);*/
+        /*}*/
+        /**/
+        /*}*/
         
         /*.fade-enter-active {*/
-            /*transform-origin: left center;*/
-            /*animation: bounce-in 1s;*/
+        /*transform-origin: left center;*/
+        /*animation: bounce-in 1s;*/
         /*}*/
         
         /*.fade-leave-active {*/
-            /*transform-origin: left center;*/
-            /*animation: bounce-in 1s reverse;*/
+        /*transform-origin: left center;*/
+        /*animation: bounce-in 1s reverse;*/
         /*}*/
-
+        
         /*//也可以直接写active  leave*/
-        .active {
-            transform-origin: left center;
-            animation: bounce-in 1s;
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
         }
-
-        .leave {
-            transform-origin: left center;
-            animation: bounce-in 1s reverse;
+        
+        .fade-enter-active,
+        .fade-leave-active {
+            /*transform-origin: left center;*/
+            /*animation: bounce-in 1s;*/
+            transition: opacity 3s;
         }
-
-
+        
+        /*.{*/
+        /*!*transform-origin: left center;*!*/
+        /*!*animation: bounce-in 1s reverse;*!*/
+        /*}*/
+    
+    
     </style>
 </head>
 <body>
@@ -59,9 +66,19 @@
           第二步就是在下面的class中写animated  表明使用Animate.css  然后空格 后面接动画效果的名字
           
           动画名字链接：https://github.com/daneden/animate.css
+          
+          
+          
+           :duration="100000"  执行时长  :duration="{enter:5000 ,leave:10000}"  入场动画时长和出场动画时长
     -->
-    <transition name="fade" enter-active-class="animated swing"
-    leave-active-class="animated shake">
+    <transition
+           
+            type="transition"
+            name="fade"
+            appear
+            enter-active-class="animated swing fade-enter-active"
+            leave-active-class="animated shake fade-leave-active"
+            appear-active-class="animated swing ">
         <div v-if="show">
             Hello World!!!
         </div>
