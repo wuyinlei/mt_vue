@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中插槽的使用(slot)</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <!--1.-->
+    <!--<child content="<p>Ruolan</p>"></child>-->
+    
+    <!--2.插槽-->
+    <child>
+        <div class="header" slot="header">header</div>
+        <div class="footer" slot="footer">footer</div>
+
+    </child>
+</div>
+
+<script>
+    
+    Vue.component("child",{
+        // props:['content'],
+        //1`<!--<div><p>Hello</p><div v-html="this.content">{{content}}</div></div>-->`.
+        //2.插槽的形式     <slot>默认值</slot>  可以定义默认值   如果父组件没有传递数值  那么就会显示默认值
+        //<slot></slot>   里面的内容就是插槽里面传递的所有内容   也就是说  比如插槽里面好多数据  那么在下面的
+        //试用插槽的时候  每一个插槽都会显示所有的数据   有几个<solt></solt>就会显示几遍传递来的数据
+        
+        //还有就是如果想使用插槽中的不同的内容  为不同的地方的插槽使用
+        //那么就可以在父组件中定义slot="name" 句名插槽
+        //例如<div class="header" slot="header">header</div>
+        //然后在使用的时候 <slot name="header"></slot>   这样使用就可以了
+        template:`<div>
+                        <p>Hello</p>
+                        <slot name="header"></slot>
+                            <div class="child">child</div>
+                             <slot name="footer"></slot>
+                        </div>          `
+        
+    })
+
+    var vm = new Vue({
+        el: "#app"
+    })
+</script>
+</body>
+</html>

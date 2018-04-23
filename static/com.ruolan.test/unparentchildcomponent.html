@@ -25,26 +25,31 @@
 
     Vue.component('child', {
         data:function(){
-            //单向绑定  需要定义一个数据来接收   然后改变selfContent就不会有警告了
+            //单向数据流   也就是子组件不能改变父组件传递过来的值
+            // 绑定  需要定义一个数据来接收   然后改变selfContent就不会有警告了
             return{
                 selfContent:this.content
             }
         },
         props: {
-            content: String
+            content: String  //定义接收类型为String  还可以进行其他接收参数的约束
         },
         template: "<div @click='handlerClick'>{{selfContent}}</div>",
         methods:{
             handlerClick:function () {
                 // alert(this.content)
-                //this.bus 就是实例上  然后就会有$emit这个方法  然后利用这个方法向外触发事件  同时携带我要传递的数据
+                //this.bus 就是实例上挂载的bus   然后就会有$emit这个方法
+                // 然后利用这个方法向外触发事件  同时携带我要传递的数据
                 this.bus.$emit('change',this.selfContent)
             }
         },
+        //组件生命周期钩子   当我们通过bus来进行非父子组件之间的传值的时候
+        // 要通过mounted这个生命周期来进行监听
         mounted:function () {
-            var this_=this
+            var this_=this  //通过定义一个变量来承载外界的全局的this
+            //通过on来进行监听
             this.bus.$on('change',function (msg) {
-                // alert(msg)
+                // alert(msg)   这里面的this作用域发生了变化  需要我们上面的this_来保存this
                 this_.selfContent = msg
             })
         }
