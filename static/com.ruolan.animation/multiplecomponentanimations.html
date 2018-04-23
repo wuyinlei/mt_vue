@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中多个元素或组件的过度</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    
+    <style>
+        
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+        
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 3s;
+        }
+    
+    </style>
+</head>
+<body>
+
+<div id="app">
+    
+    
+    <!--这个地方   如果多个组件  那么要有key值 也就是不相同的 才会起作用  否则动画不起作用-->
+    <transition mode="out-in" name="fade">
+        
+        <component :is="type"></component>
+        
+        <!--<child-one v-if="show">-->
+        <!---->
+        <!--</child-one>-->
+        <!---->
+        <!--<child-two v-else>-->
+        <!---->
+        <!---->
+        <!--</child-two>-->
+        
+        <!---->
+        <!--<div v-if="show" key="hello">-->
+        <!--Hello World!!-->
+        <!--</div>-->
+        <!--<div v-else key="world">-->
+        <!--Ruolan-->
+        <!--</div>-->
+    </transition>
+    
+    <button @click="handlerClick">切换</button>
+
+</div>
+
+<script>
+
+
+    Vue.component('child-one', {
+        template: `<div>child-one</div>`
+    })
+
+    Vue.component('child-two', {
+        template: `<div>child-two</div>`
+    })
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            type: 'child-one'
+        },
+        methods: {
+            handlerClick: function () {
+                this.type = this.type === 'child-one' ? 'child-two' : 'child-one<'
+            }
+        }
+    })
+</script>
+</body>
+</html>

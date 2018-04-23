@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的列表过度</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <style>
+    
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+        }
+    
+        .v-enter-active,
+        .v-leave-active {
+            transition: opacity 3s;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!--
+        <transition-group>list</transition-group>
+        
+        相当于<transition><div>item</div></transition>
+         
+         <transition><div>item</div></transition>
+        
+        <transition><div>item</div></transition> 也就是多个子的item
+        
+        也就是列表的过度转换为单个的多度
+    -->
+    
+    <transition-group>
+        
+        <div v-for="item of list" :key="item.id">
+            {{item.title}}
+        </div>
+    
+    </transition-group>
+    <button @click="handlerClick">Add</button>
+</div>
+
+<script>
+
+    var count = 0;
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            list: [1, 2, 3, 4, 5, 6, 7, 8]
+        },
+        methods: {
+            handlerClick: function () {
+                this.list.push({
+                    id: count++,
+                    title: 'hello world'
+                })
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
