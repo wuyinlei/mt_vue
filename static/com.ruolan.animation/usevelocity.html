@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的JS动画和velocity.js使用</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/2.0.2/velocity.min.js"></script>
+    
+    <!--velocity.js的官网     http://velocityjs.org/-->
+</head>
+<body>
+
+<div id="app">
+    <transition
+            name="fade"
+            @before-enter="handlerBeforeEnter"
+            @enter="handlerEnter"
+            @after-enter="handlerAfterEnter"
+            @before-leave="handlerBeforeLeave"
+            @leave="handlerLeave"
+            @after-leave="handlerAfterLeave"
+    >
+        <div v-show="show">Hello World!!!</div>
+    </transition>
+    <button @click="handlerClick">切换</button>
+</div>
+
+<script>
+
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            show: false
+        },
+        methods: {
+            handlerClick: function () {
+                this.show = !this.show
+            },
+            //el表示动画包裹的div标签  这里上面是div
+            handlerBeforeEnter: function (el) {
+                el.style.opacity = 0
+            },
+
+            //el表示动画包裹的div标签    BeforeEnter触发之后
+            handlerEnter: function (el, done) {
+                // setTimeout(() => {
+                //     el.style.color = 'blue'
+                //     //这里要手动的调用done()这个函数 表明这个动画已经执行完毕
+                //     // done()
+                // }, 2000)
+                //
+                // setTimeout(() => {
+                //     done()
+                // }, 4000)
+                Velocity(el,{opacity:1},{
+                    duration:2000,
+                    //执行完成   然后回调done这个执行
+                    complete:done
+                })
+            },
+            //在done()调用之后会进行调用
+            handlerAfterEnter: function (el) {
+                el.style.color = '#000ddd'
+            },
+            handlerBeforeLeave: function () {
+
+            },
+            handlerLeave: function () {
+
+            },
+            handlerAfterLeave: function () {
+
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
