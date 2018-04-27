@@ -2,8 +2,6 @@
   <div class="wrapper">
     <swiper :options="swiperOption">
 
-
-
       <!-- slides -->
       <swiper-slide v-for="item of swiperList" :key="item.id">
 
@@ -12,8 +10,6 @@
 
 
       </swiper-slide>
-
-
 
       <!-- Optional controls -->
       <div class="swiper-pagination" slot="pagination"></div>
