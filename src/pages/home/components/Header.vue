@@ -6,7 +6,9 @@
     <div class="header-input">
       <span class="iconfont">&#xe632;</span>输入城市/景点/游园/主题
     </div>
-    <div class="header-location">{{this.city}}<span class="iconfont arrow-icon">&#xe64a;</span></div>
+    <router-link to="/city">
+      <div class="header-location">{{this.city}}<span class="iconfont arrow-icon">&#xe64a;</span></div>
+    </router-link>
 
   </div>
 </template>
@@ -22,7 +24,7 @@
 <style lang="stylus" scoped>
   @import "~styles/varibles.styl"
   .header
-    line-height: 0.86rem
+    line-height: $headerHeight
     display flex
     background $bgColor
     color: #fff
@@ -46,6 +48,7 @@
       width: 1.24rem
       float: right
       text-align center
+      color white
       .arrow-icon
         font-size: 0.24rem
 

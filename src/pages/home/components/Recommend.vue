@@ -31,7 +31,6 @@
 <style lang="stylus" scoped>
   @import "~styles/mixins.styl"
   .title
-    margin-top .2rem
     line-height .8rem
     background #fff
     text-indent .2rem
@@ -42,7 +41,7 @@
     height 1.9rem
     overflow hidden
     .item-img
-      width 2.4rem
+      width 1.7rem
       height 1.7rem
       padding .1rem
     .item-info
