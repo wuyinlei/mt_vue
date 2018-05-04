@@ -1,22 +1,22 @@
 <template>
   <div>
-    <home-header>
+    <home-header :city="city">
 
     </home-header>
 
-    <home-swiper>
+    <home-swiper :list="swiperList">
 
     </home-swiper>
 
-    <home-icons>
+    <home-icons :iconList = "iconList">
 
     </home-icons>
 
-    <home-recommend>
+    <home-recommend :recommendList="recommendList">
 
     </home-recommend>
 
-    <home-weekend>
+    <home-weekend :weekendList="weekendList">
 
     </home-weekend>
   </div>
@@ -43,7 +43,24 @@
           .then(this.getHomeInfoSucc)
       },
       getHomeInfoSucc(res) {
-        console.log(res)
+        res = res.data
+        if (res.ret && res.data) {
+          const data = res.data;
+          this.city = data.city
+          this.swiperList = data.swiperList
+          this.iconList = data.iconList
+          this.recommendList = data.recommendList
+          this.weekendList = data.weekendList
+        }
+      }
+    },
+    data() {
+      return {
+        city: '',
+        swiperList: [],
+        iconList:[],
+        recommendList:[],
+        weekendList:[]
       }
     },
     mounted() {

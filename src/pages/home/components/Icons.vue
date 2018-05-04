@@ -21,58 +21,14 @@
 <script>
   export default {
     name: "HomeIcons",
+    props: {
+      iconList: Array
+    },
     data() {
       return {
         swiperOptionIcon: {
           loop: false
-        },
-        iconList: [
-          {
-            "id": "0001",
-            "imgUrl": "",
-            "desc": "景点门票"
-          },
-          {
-            "id": "0002",
-            "imgUrl": "",
-            "desc": "滑雪季"
-          },
-          {
-            "id": "0003",
-            "imgUrl": "",
-            "desc": "泡温泉"
-          },
-          {
-            "id": "0004",
-            "imgUrl": "",
-            "desc": "动植物"
-          },
-          {
-            "id": "0005",
-            "imgUrl": "",
-            "desc": "大海"
-          },
-          {
-            "id": "0006",
-            "imgUrl": "",
-            "desc": "高山"
-          },
-          {
-            "id": "0007",
-            "imgUrl": "",
-            "desc": "农家乐"
-          },
-          {
-            "id": "0008",
-            "imgUrl": "",
-            "desc": "车展会场"
-          },
-          {
-            "id": "0009",
-            "imgUrl": "",
-            "desc": "一日游"
-          }
-        ]
+        }
       }
     },
     computed: {
@@ -98,6 +54,7 @@
   .icons >>> .swiper-container
     height 0
     padding-bottom 50%
+
   .icons
     margin-top .2rem
     .icon
@@ -108,7 +65,6 @@
       height: 0
       .icon-desc
         bottom 0
-        position absolute
         left 0
         right 0
         height .44rem
@@ -124,6 +80,7 @@
         bottom: .44rem
         box-sizing border-box
         padding .1rem
+
         .icon-img-content
           display: block
           margin: 0 auto

@@ -22,42 +22,9 @@
 <script>
   export default {
     name: 'Recommend',
-    data() {
-      return {
-        recommendList: [
-          {
-            "id": "0001",
-            "imgUrl": "http://imgs.qunarzz.com/p/p48/201302/28/bc44faa497db0dcf93835fbb.jpg_256x160_0ba13461.jpg",
-            "title": "北京蓝田玉烟别墅你值得拥有哈哈",
-            "desc": "北京昌平区天通苑北王府花园"
-          },
-          {
-            "id": "0002",
-            "imgUrl": "http://imgs.qunarzz.com/p/p48/201302/28/bc44faa497db0dcf93835fbb.jpg_256x160_0ba13461.jpg",
-            "title": "北京蓝田玉烟别墅我已经有了你信么，我不信",
-            "desc": "北京昌平区天通苑北王府花园"
-          },
-          {
-            "id": "0003",
-            "imgUrl": "http://imgs.qunarzz.com/p/p48/201302/28/bc44faa497db0dcf93835fbb.jpg_256x160_0ba13461.jpg",
-            "title": "北京蓝田玉烟别墅",
-            "desc": "北京昌平区天通苑北王府花园"
-          },
-          {
-            "id": "0004",
-            "imgUrl": "http://imgs.qunarzz.com/p/p48/201302/28/bc44faa497db0dcf93835fbb.jpg_256x160_0ba13461.jpg",
-            "title": "北京蓝田玉烟别墅",
-            "desc": "北京昌平区天通苑北王府花园"
-          },
-          {
-            "id": "0005",
-            "imgUrl": "http://imgs.qunarzz.com/p/p48/201302/28/bc44faa497db0dcf93835fbb.jpg_256x160_0ba13461.jpg",
-            "title": "北京蓝田玉烟别墅",
-            "desc": "北京昌平区天通苑北王府花园"
-          },
-        ]
-      }
-    }
+    props:{
+      recommendList:Array
+    },
   }
 </script>
 

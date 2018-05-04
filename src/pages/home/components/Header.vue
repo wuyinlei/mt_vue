@@ -6,13 +6,16 @@
     <div class="header-input">
       <span class="iconfont">&#xe632;</span>输入城市/景点/游园/主题
     </div>
-    <div class="header-location" >北京 <span class="iconfont arrow-icon">&#xe64a;</span></div>
+    <div class="header-location">{{this.city}}<span class="iconfont arrow-icon">&#xe64a;</span></div>
 
   </div>
 </template>
 <script>
   export default {
-    name: 'HomeHeader'
+    name: 'HomeHeader',
+    props: {
+      city: String
+    }
   }
 </script>
 <!--这里试用scoped来限定使用范围  不会对其他有印象-->
