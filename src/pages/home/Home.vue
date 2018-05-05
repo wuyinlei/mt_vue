@@ -8,7 +8,7 @@
 
     </home-swiper>
 
-    <home-icons :iconList = "iconList">
+    <home-icons :iconList="iconList">
 
     </home-icons>
 
@@ -58,9 +58,9 @@
       return {
         city: '',
         swiperList: [],
-        iconList:[],
-        recommendList:[],
-        weekendList:[]
+        iconList: [],
+        recommendList: [],
+        weekendList: []
       }
     },
     mounted() {
