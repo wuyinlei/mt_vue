@@ -5,7 +5,7 @@
     <city-header>
     </city-header>
 
-    <city-search>
+    <city-search :cityes="cityes">
 
     </city-search>
 
