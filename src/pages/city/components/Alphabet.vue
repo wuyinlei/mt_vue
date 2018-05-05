@@ -27,6 +27,8 @@
         }
         return letters
       }
+    }, updated() {
+      this.startY = this.$refs['A'][0].offsetTop
     }
     , methods: {
       handleLetterClick(e) {
@@ -37,14 +39,19 @@
       },
       handleTouchMove(e) {
         if (this.touchStatus) {
-          //获取到A距离顶部的高度
-          const startY = this.$refs['A'][0].offsetTop
-          //获取到移动的时候的距离顶部的高度值
-          const touchY = e.touches[0].clientY - 79
-          const index = Math.floor((touchY - startY) / 20)
-          if (index >= 0 && index < this.letters().length) {
-            this.$emit('change', this.letters[index])
+          if (this.timer) {
+            clearTimeout(this.timer)
           }
+          this.timer = setTimeout(() => {
+            //获取到A距离顶部的高度
+            //获取到移动的时候的距离顶部的高度值
+            const touchY = e.touches[0].clientY - 79
+            const index = Math.floor((touchY - this.startY) / 20)
+            if (index >= 0 && index < this.letters.length) {
+              this.$emit('change', this.letters[index])
+            }
+          }, 16)
+
         }
       },
       handleTouchEnd() {
@@ -53,7 +60,9 @@
     },
     data() {
       return {
-        touchStatus: false
+        touchStatus: false,
+        startY: 0,
+        timer: null
       }
     }
   }
