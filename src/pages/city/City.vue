@@ -12,6 +12,10 @@
     <city-list>
 
     </city-list>
+
+    <city-alphabet>
+
+    </city-alphabet>
   </div>
 
 
@@ -23,6 +27,7 @@
   import CityHeader from './components/Header'
   import CitySearch from './components/Search'
   import CityList from './components/List'
+  import CityAlphabet from './components/Alphabet'
 
 
 
@@ -32,6 +37,7 @@
       CityList,
       CityHeader,
       CitySearch,
+      CityAlphabet
     }
   }
 </script>
