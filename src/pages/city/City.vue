@@ -9,11 +9,11 @@
 
     </city-search>
 
-    <city-list :cityes="cityes" :hotCities="hotCities">
+    <city-list :letter="letter" :cityes="cityes" :hotCities="hotCities">
 
     </city-list>
 
-    <city-alphabet :cityes="cityes">
+    <city-alphabet @change='handlerLetterChange' :cityes="cityes">
 
     </city-alphabet>
   </div>
@@ -48,12 +48,16 @@
           this.hotCities = data.hotCities
           this.cityes = data.cities
         }
+      },
+      handlerLetterChange(letter) {
+        this.letter = letter
       }
     },
     data() {
       return {
         hotCities: [],
-        cityes: {}
+        cityes: {},
+        letter: ''
       }
     },
     mounted() {
