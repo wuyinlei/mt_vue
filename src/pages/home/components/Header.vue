@@ -7,16 +7,20 @@
       <span class="iconfont">&#xe632;</span>输入城市/景点/游园/主题
     </div>
     <router-link to="/city">
-      <div class="header-location">{{this.city}}<span class="iconfont arrow-icon">&#xe64a;</span></div>
+      <div class="header-location">
+        {{this.city}}
+        <span class="iconfont arrow-icon">&#xe64a;</span></div>
     </router-link>
 
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
   export default {
     name: 'HomeHeader',
-    props: {
-      city: String
+    computed:{
+      //mapState是指把vuex里面的数据映射到这个组件的computed的计算属性里面  也就是把city这个数据映射到
+      ...mapState(['city'])
     }
   }
 </script>
@@ -45,7 +49,8 @@
       padding-left: 0.2rem
       color: #ccc
     .header-location
-      width: 1.24rem
+      padding 0 .1rem
+      min-width: 1.04rem
       float: right
       text-align center
       color white

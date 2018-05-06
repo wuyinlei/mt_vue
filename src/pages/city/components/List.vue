@@ -6,14 +6,18 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
-            <div class="button">北京</div>
+            <div class="button">{{this.currentCity}}</div>
           </div>
         </div>
       </div>
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
         <div class="button-list">
-          <div class="button-wrapper" v-for="item of hotCities" :key="hotCities.id">
+          <div class="button-wrapper"
+               v-for="item of hotCities"
+               :key="hotCities.id"
+               @click="handleCityClick(item.name)"
+          >
             <div class="button">{{item.name}}</div>
           </div>
         </div>
@@ -25,7 +29,11 @@
       >
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list">
-          <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">
+          <div class="item border-bottom"
+               v-for="innerItem of item"
+               :key="innerItem.id"
+               @click="handleCityClick(innerItem.name)"
+          >
             {{innerItem.name}}
           </div>
         </div>
@@ -36,24 +44,39 @@
 
 <script>
   import BScroll from 'better-scroll'
+  import {mapState,mapMutations} from 'vuex'
 
   export default {
     name: 'CityList',
     mounted() {
       this.scroll = new BScroll(this.$refs.wrapper)
     },
-    watch:{
-      letter(){
-        if (this.letter){
+    computed:{
+      //mapState是指把vuex里面的数据映射到这个组件的computed的计算属性里面  也就是把city这个数据映射到
+      ...mapState({
+        currentCity:'city'
+      })
+    },
+    watch: {
+      letter() {
+        if (this.letter) {
           const element = this.$refs[this.letter][0]
           this.scroll.scrollToElement(element)
         }
       }
     },
-    props:{
-      hotCities:Array,
-      cityes:Object,
-      letter:String
+    methods: {
+      handleCityClick(city) {
+        // this.$store.commit('changeCity', city)
+        this.changeCity(city),
+        this.$router.push('/')
+      },
+      ...mapMutations(['changeCity'])
+    },
+    props: {
+      hotCities: Array,
+      cityes: Object,
+      letter: String
     }
   }
 </script>
@@ -67,8 +90,8 @@
       border-color #ccc
 
   .border-bottom
-   &:before
-    border-color #ccc
+    &:before
+      border-color #ccc
 
   .list
     overflow hidden
